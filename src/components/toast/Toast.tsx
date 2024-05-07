@@ -18,9 +18,12 @@ const Toast: React.FC<ToastProps> = ({ message, duration = 4000 }) => {
     return () => clearTimeout(timer);
   }, [duration]);
 
-  return <ToastContainer visible={visible}>
-    <img src="" />
-    {message}</ToastContainer>;
+  return (
+    <ToastContainer visible={visible}>
+      <img src="" />
+      {message}
+    </ToastContainer>
+  );
 };
 
 export default Toast;

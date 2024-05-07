@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ToastContainer = styled.div<{ visible: boolean }>`
   position: fixed;
-  bottom: ${({ visible }) => (visible ? '20px' : '-100px')};
+  bottom: ${({ visible }) => (visible ? "20px" : "-100px")};
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;

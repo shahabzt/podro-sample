@@ -5,7 +5,7 @@ export const WelcomeTexts = styled.div({
   flexDirection: "column",
   rowGap: "8px",
   margin: "32px 0",
-  alignItems:"center"
+  alignItems: "center",
 });
 
 export const Input = styled.input`
@@ -26,15 +26,12 @@ export const Input = styled.input`
   }
 `;
 
-
-
 export const RegisterText = styled.div({
   marginTop: "32px",
 });
 
-export const ErrorMsg =styled.div({
-    fontSize:"12px",
-    color:"red",
-    minWidth:"300px"
-
-})
+export const ErrorMsg = styled.div({
+  fontSize: "12px",
+  color: "red",
+  minWidth: "300px",
+});

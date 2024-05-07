@@ -26,7 +26,6 @@ const Verification: FC = () => {
   const navigate = useNavigate();
   const { value, start, reset, stop } = useTimer({ startsFrom: 60 });
 
-
   const phoneNumber = useSelector(
     (state: RootState) => state.setPhoneNumber.phoneNumber
   );
@@ -84,7 +83,9 @@ const Verification: FC = () => {
           {btncontent(value, values.otpCode)}
         </Button>
       </form>
-      {values.otpCode !== "1111" && values.otpCode.length === 4 ? <Toast message="کد وارد شده اشتباه است" />: null}
+      {values.otpCode !== "1111" && values.otpCode.length === 4 ? (
+        <Toast message="کد وارد شده اشتباه است" />
+      ) : null}
     </LoginSheet>
   );
 };
