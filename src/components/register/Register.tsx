@@ -1,39 +1,36 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import PodroLogo from "../../assets/images/LogoType.svg";
 import { LoginSheet } from "../../styles/LoginSheet";
 import { Caption, LinkedText, Subtitle, Title } from "../../styles/typography";
-import {
-  Button,
-  Input,
-  RegisterText,
-  WelcomeTexts,
-  ErrorMsg,
-} from "./Login.Styles";
-import { ErrorMessage, useFormik } from "formik";
+import { Input, RegisterText, WelcomeTexts, ErrorMsg } from "./Register.Styles";
+import { useFormik } from "formik";
 import registrationFormScheme from "../../utils/validations/registerPhoneNumber";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPhoneNumber } from "../../store/reducers/verifyReducer";
-import { useNavigate } from "react-router";
-const Login: FC = () => {
+import { RootState } from "../../store/store";
+import { Button } from "../../styles/Button";
+
+const Register: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const persistPhoneNumber = useSelector(
+    (state: RootState) => state.setPhoneNumber.phoneNumber
+  );
   const handleRegister = () => {
     dispatch(
       setPhoneNumber({ activeStep: 1, phoneNumber: values.phoneNumber })
     );
-    navigate("/samira")
   };
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
     onSubmit: handleRegister,
     validationSchema: registrationFormScheme,
     initialValues: {
-      phoneNumber: "",
+      phoneNumber: persistPhoneNumber ? persistPhoneNumber : "",
     },
   });
 
   return (
     <LoginSheet>
-      <img src={PodroLogo} />
+      <img src={PodroLogo} alt="podro" />
       <WelcomeTexts>
         <Subtitle>به پنل مدیریت تسک پادرو خوش آمدید</Subtitle>
         <Caption>برای ورود، لطفا شماره موبایل خود را وارد کنید</Caption>
@@ -43,6 +40,7 @@ const Login: FC = () => {
           placeholder="شماره موبایل"
           onChange={(e) => setFieldValue("phoneNumber", e.target.value)}
           type="text"
+          value={values.phoneNumber}
         />
         {!!errors.phoneNumber && <ErrorMsg>{errors.phoneNumber}</ErrorMsg>}
 
@@ -63,4 +61,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Register;
