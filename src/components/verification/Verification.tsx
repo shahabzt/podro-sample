@@ -40,7 +40,7 @@ const Verification: FC = () => {
   };
 
   const handleRegister = () => {
-    navigate("/farhad");
+    navigate("/search");
   };
 
   const { handleSubmit, values, setFieldValue, errors } = useFormik({

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./login/Login";
+import Search from "./search/Search";
 
 const AppRouter = createBrowserRouter([
   {
@@ -8,8 +9,8 @@ const AppRouter = createBrowserRouter([
   },
  
   {
-    path:`/farhad`,
-    element:<>dadashi joon</>
+    path:`/search`,
+    element:<Search/>
   }
 ]);
 
