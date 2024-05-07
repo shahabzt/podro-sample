@@ -10,17 +10,17 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import setPhoneNumberReducer from "./reducers/verifyReducer";
 ;
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [""],
+  whitelist: ["setPhoneNumber"],
 };
 
 const rootReducer = combineReducers({
-//   filterList: filterArrayReducer,
-//   subCategoriesList: subCategoriesReducer,
+    setPhoneNumber : setPhoneNumberReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
