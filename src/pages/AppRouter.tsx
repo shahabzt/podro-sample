@@ -1,19 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import Login from "./login/Login";
 
 const AppRouter = createBrowserRouter([
-    {
-      path: `/`,
-      element: (
-       <div>shahab</div>
-      ),
-    },
-    {
-      path: `/samira`,
-      element: (
-        <>samira</>
-      ),
-    },
-  ]);
-  
-  export default AppRouter;
+  {
+    path: `/`,
+    element: <Login/>,
+  },
+ 
+  {
+    path:`/farhad`,
+    element:<>dadashi joon</>
+  }
+]);
+
+export default AppRouter;
