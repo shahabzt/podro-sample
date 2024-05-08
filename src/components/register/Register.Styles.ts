@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const WelcomeTexts = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  rowGap: "8px",
-  margin: "32px 0",
-  alignItems: "center",
-});
-
 export const Input = styled.input`
   width: 100%;
   height: 48px;
@@ -28,10 +20,4 @@ export const Input = styled.input`
 
 export const RegisterText = styled.div({
   marginTop: "32px",
-});
-
-export const ErrorMsg = styled.div({
-  fontSize: "12px",
-  color: "red",
-  minWidth: "300px",
 });

@@ -28,3 +28,9 @@ export const LinkedText = styled.a`
   margin-right: 8px;
   cursor: pointer;
 `;
+
+export const ErrorMsg = styled.div({
+  fontSize: "12px",
+  color: "red",
+  minWidth: "300px",
+});

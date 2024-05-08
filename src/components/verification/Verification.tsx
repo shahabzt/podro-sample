@@ -15,7 +15,6 @@ import {
   setPhoneNumber,
 } from "../../store/reducers/verificationReducer";
 import { RootState } from "../../store/store";
-import { WelcomeTexts } from "../register/Register.Styles";
 import OTPInput from "../otpInput/OtpInput";
 import { useTimer } from "../../hooks/useCountDown";
 import { useNavigate } from "react-router";
@@ -24,6 +23,7 @@ import { Button } from "../../styles/Button";
 import { btncontent } from "../../utils/functions/btnContent";
 import Toast from "../toast/Toast";
 import textConstants from "../../constants/textConstants";
+import { WelcomeTexts } from "../../styles/WelcomTexts";
 
 const Verification: FC = () => {
   const dispatch = useDispatch();
@@ -48,9 +48,9 @@ const Verification: FC = () => {
     dispatch(resetVerify());
   };
 
-  const { handleSubmit, values, setFieldValue, errors } = useFormik({
+  const { handleSubmit, values, setFieldValue } = useFormik({
     onSubmit: handleRegister,
-    // validationSchema: registrationFormScheme,
+   
     initialValues: {
       otpCode: "",
     },

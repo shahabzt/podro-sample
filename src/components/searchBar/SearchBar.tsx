@@ -24,7 +24,6 @@ const SearchBar: FC = () => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false);
   const [fetchErrors, setFetchErrors] = useState<string | null>(null);
-  const [showLocationInfo, setShowLocationInfo] = useState(false);
   const throttledHandleRegister = useThrottle({
     maxRequests: 5,
     interval: 60000,
@@ -39,7 +38,6 @@ const SearchBar: FC = () => {
           const filteredLocationsData = filteredLocationData(res);
           dispatch(setNewLocation(filteredLocationsData));
           setIsFetching(false);
-          setShowLocationInfo(true);
         })
         .catch((err) => {
           setIsFetching(false);
