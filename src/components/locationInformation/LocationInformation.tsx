@@ -7,9 +7,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import LocationFactory from "../locationFactory/LocationFactory";
 import MapLocation from "../../assets/images/Rectangle.png";
+
 const LocationInformation: FC = () => {
+  //States
   const data = useSelector((state: RootState) => state.locationList);
   const [newElementIndex, setNewElementIndex] = useState(-1);
+  //Watchers
   useEffect(() => {
     setNewElementIndex(data.length - 1);
   }, [data.length]);

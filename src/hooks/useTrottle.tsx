@@ -6,9 +6,10 @@ interface ThrottleOptions {
 }
 
 const useThrottle = ({ maxRequests, interval }: ThrottleOptions) => {
+  //States
   const lastCallTimeRef = useRef<number>(0);
   const requestCountRef = useRef<number>(0);
-
+  //Memos
   const throttledFunction = useCallback(
     (callback: () => void) => {
       const now = Date.now();

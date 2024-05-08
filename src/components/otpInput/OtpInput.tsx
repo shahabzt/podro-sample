@@ -23,9 +23,10 @@ interface OtpInputProps {
 }
 
 const OTPInput: React.FC<OtpInputProps> = ({ setFieldValue }) => {
+  //States
   const [otp, setOtp] = useState<string[]>(new Array(4).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
+  //Handlers
   const handleChange = (index: number, value: string) => {
     if (isNaN(Number(value))) {
       return;

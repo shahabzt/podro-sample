@@ -26,6 +26,7 @@ import textConstants from "../../constants/textConstants";
 import { WelcomeTexts } from "../../styles/WelcomTexts";
 
 const Verification: FC = () => {
+  //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { value, start, reset, stop } = useTimer({ startsFrom: 60 });
@@ -33,6 +34,8 @@ const Verification: FC = () => {
   const phoneNumber = useSelector(
     (state: RootState) => state.setPhoneNumber.phoneNumber
   );
+
+  //Handlers
   const handleBack = () => {
     dispatch(setPhoneNumber({ activeStep: 0, phoneNumber: phoneNumber }));
   };
@@ -48,6 +51,7 @@ const Verification: FC = () => {
     dispatch(resetVerify());
   };
 
+  //Formik
   const { handleSubmit, values, setFieldValue } = useFormik({
     onSubmit: handleRegister,
    
@@ -55,6 +59,8 @@ const Verification: FC = () => {
       otpCode: "",
     },
   });
+
+  //Watchers
   useEffect(() => {
     start();
     if (values.otpCode === "1111") {

@@ -7,8 +7,9 @@ interface ToastProps {
 }
 
 const Toast: React.FC<ToastProps> = ({ message, duration = 4000 }) => {
+  //States
   const [visible, setVisible] = useState(false);
-
+  //Watchers
   useEffect(() => {
     setVisible(true);
     const timer = setTimeout(() => {

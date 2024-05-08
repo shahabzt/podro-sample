@@ -20,14 +20,16 @@ import useThrottle from "../../hooks/useTrottle";
 import { ipRegisterSchema } from "../../utils/validations/ipRegisterSchema";
 
 const SearchBar: FC = () => {
+  //Hooks
   const dispatch = useDispatch();
-  const [isFetching, setIsFetching] = useState(false);
-  const [fetchErrors, setFetchErrors] = useState<string | null>(null);
   const throttledHandleRegister = useThrottle({
     maxRequests: 5,
     interval: 60000,
   });
-
+  //States
+  const [isFetching, setIsFetching] = useState(false);
+  const [fetchErrors, setFetchErrors] = useState<string | null>(null);
+  //Handlers
   const handleRegister = () => {
     if (!isFetching) {
       setIsFetching(true);
@@ -59,6 +61,7 @@ const SearchBar: FC = () => {
     }
   };
 
+  //Formik
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
     onSubmit: handleThrottledRegister,
     validationSchema: ipRegisterSchema,

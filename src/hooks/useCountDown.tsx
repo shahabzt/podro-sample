@@ -5,7 +5,7 @@ interface UseTimerOptions {
 }
 
 export function useTimer({ startsFrom }: UseTimerOptions) {
-
+  //States
   const [timer, setTimer] = useState<number>(startsFrom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
 
@@ -13,7 +13,7 @@ export function useTimer({ startsFrom }: UseTimerOptions) {
 
   const isDone = timer === 0;
 
-
+  //Watchers
   useEffect(() => {
     if (isStarted) {
       timerId.current = setInterval(() => {
@@ -35,7 +35,7 @@ export function useTimer({ startsFrom }: UseTimerOptions) {
     }
   }, [isStarted]);
 
-
+  //Functions
   function start() {
     setIsStarted(true);
   }

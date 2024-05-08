@@ -1,8 +1,13 @@
 import { FC } from "react";
 import PodroLogo from "../../assets/images/LogoType.svg";
 import { LoginSheet } from "../../styles/LoginSheet";
-import { Caption, ErrorMsg, LinkedText, Subtitle, } from "../../styles/typography";
-import {  Input, RegisterText} from "./Register.Styles";
+import {
+  Caption,
+  ErrorMsg,
+  LinkedText,
+  Subtitle,
+} from "../../styles/typography";
+import { Input, RegisterText } from "./Register.Styles";
 import { useFormik } from "formik";
 import registrationFormScheme from "../../utils/validations/registerPhoneNumber";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +16,22 @@ import { RootState } from "../../store/store";
 import { Button } from "../../styles/Button";
 import textConstants from "../../constants/textConstants";
 import { WelcomeTexts } from "../../styles/WelcomTexts";
+
 const Register: FC = () => {
   const dispatch = useDispatch();
+  //States
   const persistPhoneNumber = useSelector(
     (state: RootState) => state.setPhoneNumber.phoneNumber
   );
+
+  //Handlers
   const handleRegister = () => {
     dispatch(
       setPhoneNumber({ activeStep: 1, phoneNumber: values.phoneNumber })
     );
   };
+
+  //Formik
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
     onSubmit: handleRegister,
     validationSchema: registrationFormScheme,
