@@ -3,8 +3,16 @@ import styled from "styled-components";
 export const SearchBoxContainer = styled.form({
   display: "flex",
   width: "66%",
-  marginTop:"32px"
+  marginTop: "32px",
 });
+
+export const SectionContainer = styled.section<{ show: boolean }>`
+  transform: translateY(${(props) => (props.show ? "0" : "100%")});
+  transition: transform 0.5s ease-out;
+  display: flex;
+  flex-direction:column
+  align-items: center;
+`;
 
 export const SearchInputContainer = styled.div`
   display: flex;

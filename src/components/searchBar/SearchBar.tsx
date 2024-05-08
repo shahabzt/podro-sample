@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { SearchBarSheet } from "../../styles/SearchBarSheet";
 import { Subtitle, Title } from "../../styles/typography";
 import {
   SearchBoxContainer,
@@ -7,71 +6,96 @@ import {
   SearchIcon,
   SearchInput,
   SearchInputContainer,
+  SectionContainer,
 } from "./SearchBar.style";
 import SearchIconNormal from "../../assets/images/SearchNoraml.svg";
 import SearchIconNormalWhite from "../../assets/images/search-normal.svg";
 import { useFormik } from "formik";
-import { ResponseData } from "../../services/getLocationInfo/getLocationInfo.types";
 import getLocationInfo from "../../services/getLocationInfo/getLocationInfo";
 import textConstants from "../../constants/textConstants";
 import { useDispatch } from "react-redux";
 import { setNewLocation } from "../../store/reducers/locationListReducer";
+import { filteredLocationData } from "../../utils/functions/filteredLocationData";
+import Toast from "../toast/Toast";
+import useThrottle from "../../hooks/useTrottle";
+import { ipRegisterSchema } from "../../utils/validations/ipRegisterSchema";
 
 const SearchBar: FC = () => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [fetchErrors, setFetchErrors] = useState<string | null>(null);
+  const [showLocationInfo, setShowLocationInfo] = useState(false);
+  const throttledHandleRegister = useThrottle({
+    maxRequests: 5,
+    interval: 60000,
+  });
 
   const handleRegister = () => {
     if (!isFetching) {
       setIsFetching(true);
-      setError(null);
+      setFetchErrors(null);
       getLocationInfo(values.ipNumber)
         .then((res) => {
-          dispatch(setNewLocation(res));
+          const filteredLocationsData = filteredLocationData(res);
+          dispatch(setNewLocation(filteredLocationsData));
           setIsFetching(false);
+          setShowLocationInfo(true);
         })
         .catch((err) => {
           setIsFetching(false);
           if (err.response && err.response.status === 400) {
-            setError(textConstants.tryAgain);
+            setFetchErrors(textConstants.tryAgain);
           } else if (err.response && err.response.status === 500) {
-            setError(textConstants.serverNotFound);
+            setFetchErrors(textConstants.serverNotFound);
           } else {
-            setError(textConstants.noService);
+            setFetchErrors(textConstants.noService);
           }
         });
     }
   };
 
+  const handleThrottledRegister = () => {
+    if (!isFetching) {
+      setIsFetching(true);
+      setFetchErrors(null);
+      throttledHandleRegister(handleRegister);
+    }
+  };
+
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
-    onSubmit: handleRegister,
+    onSubmit: handleThrottledRegister,
+    validationSchema: ipRegisterSchema,
     initialValues: {
       ipNumber: "",
     },
   });
 
   return (
-    <SearchBarSheet>
-      <Title $color="">{textConstants.searchTitle}</Title>
-      <Subtitle color="#7E838F" fontWeight={400}>
-        {textConstants.searchCaption}
-      </Subtitle>
-      <SearchBoxContainer onSubmit={handleSubmit}>
-        <SearchInputContainer>
-          <SearchIcon src={SearchIconNormal} alt="" />
-          <SearchInput
-            type="text"
-            placeholder="جستجو"
-            onChange={(e) => setFieldValue("ipNumber", e.target.value)}
-          />
-        </SearchInputContainer>
-        <SearchButton type="submit">
-          <img src={SearchIconNormalWhite} alt="" />
-        </SearchButton>
-      </SearchBoxContainer>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-    </SearchBarSheet>
+    <>
+     
+        <Title $color="">{textConstants.searchTitle}</Title>
+        <Subtitle color="#7E838F" fontWeight={400}>
+          {textConstants.searchCaption}
+        </Subtitle>
+        <SearchBoxContainer  onSubmit={handleSubmit}>
+          <SearchInputContainer>
+            <SearchIcon src={SearchIconNormal} alt="" />
+            <SearchInput
+              type="text"
+              placeholder="جستجو"
+              onChange={(e) => setFieldValue("ipNumber", e.target.value)}
+            />
+          </SearchInputContainer>
+          <SearchButton type="submit">
+            <img src={SearchIconNormalWhite} alt="" />
+          </SearchButton>
+        </SearchBoxContainer>
+        {errors.ipNumber && (
+          <div style={{ color: "red" }}>{errors.ipNumber}</div>
+        )}
+     
+      {fetchErrors && <Toast message={fetchErrors} />}
+    </>
   );
 };
 
