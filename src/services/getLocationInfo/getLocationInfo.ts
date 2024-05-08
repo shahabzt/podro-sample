@@ -1,11 +1,15 @@
-
-import { LocationInfo } from "./getLocationInfo.types";
-
+import axios, { AxiosResponse } from "axios";
+import { ResponseData } from "./getLocationInfo.types";
+import { TOKEN } from "../../constants/tokens";
 import http from "../../utils/http";
 
-const getLocationInfo = async (ipAddress: string) => {
-  const res = await http.get<LocationInfo>(ipAddress);
-  return res.data;
+const getLocationInfo = (ipAddress: string) => {
+  return http.get<ResponseData>("ipgeo", {
+    params: {
+      apiKey:TOKEN.accessToken,
+      ip:ipAddress,
+    },
+  }).then(res=>res.data);
 };
 
 
