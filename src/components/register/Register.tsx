@@ -6,10 +6,10 @@ import { Input, RegisterText, WelcomeTexts, ErrorMsg } from "./Register.Styles";
 import { useFormik } from "formik";
 import registrationFormScheme from "../../utils/validations/registerPhoneNumber";
 import { useDispatch, useSelector } from "react-redux";
-import { setPhoneNumber } from "../../store/reducers/verifyReducer";
+import { setPhoneNumber } from "../../store/reducers/verificationReducer";
 import { RootState } from "../../store/store";
 import { Button } from "../../styles/Button";
-
+import textConstants from "../../constants/textConstants";
 const Register: FC = () => {
   const dispatch = useDispatch();
   const persistPhoneNumber = useSelector(
@@ -32,8 +32,8 @@ const Register: FC = () => {
     <LoginSheet>
       <img src={PodroLogo} alt="podro" />
       <WelcomeTexts>
-        <Subtitle>به پنل مدیریت تسک پادرو خوش آمدید</Subtitle>
-        <Caption>برای ورود، لطفا شماره موبایل خود را وارد کنید</Caption>
+        <Subtitle>{textConstants.welcome}</Subtitle>
+        <Caption>{textConstants.inputPhoneNumber}</Caption>
       </WelcomeTexts>
       <form style={{ width: "100%" }} onSubmit={handleSubmit}>
         <Input
@@ -48,13 +48,13 @@ const Register: FC = () => {
           type="submit"
           disabled={!!errors.phoneNumber || !values.phoneNumber.length}
         >
-          ارسال کد‌ تایید
+          {textConstants.registerCode}
         </Button>
       </form>
       <RegisterText>
         <Caption>
-          حساب کاربری ندارید؟
-          <LinkedText>ثبت نام</LinkedText>
+          {textConstants.noAccount}
+          <LinkedText>{textConstants.createAccount}</LinkedText>
         </Caption>
       </RegisterText>
     </LoginSheet>

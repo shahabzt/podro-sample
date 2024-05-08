@@ -10,7 +10,7 @@ import {
 } from "./Verification.style";
 import { Caption, LinkedText, Subtitle } from "../../styles/typography";
 import { useDispatch, useSelector } from "react-redux";
-import { setPhoneNumber } from "../../store/reducers/verifyReducer";
+import { resetVerify, setPhoneNumber } from "../../store/reducers/verificationReducer";
 import { RootState } from "../../store/store";
 import { WelcomeTexts } from "../register/Register.Styles";
 import OTPInput from "../otpInput/OtpInput";
@@ -20,6 +20,7 @@ import { useFormik } from "formik";
 import { Button } from "../../styles/Button";
 import { btncontent } from "../../utils/functions/btnContent";
 import Toast from "../toast/Toast";
+import textConstants from "../../constants/textConstants";
 
 const Verification: FC = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Verification: FC = () => {
 
   const handleRegister = () => {
     navigate("/search");
+    dispatch(resetVerify())
   };
 
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
@@ -64,27 +66,35 @@ const Verification: FC = () => {
         <BackIcon src={ArrowLeft} alt="" onClick={handleBack} />
       </HeaderContainer>
       <WelcomeTexts>
-        <Subtitle>کد تایید را وارد کنید</Subtitle>
+        <Subtitle>
+          {textConstants.inputOtpCode}
+        </Subtitle>
         <Caption>
           کد تایید برای شماره
           {phoneNumber}
           ارسال شد
         </Caption>
-        <LinkedText onClick={handleBack}>تغییر شماره همراه</LinkedText>
+        <LinkedText onClick={handleBack}>
+          {textConstants.changeNumber}
+        </LinkedText>
       </WelcomeTexts>
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <OTPInput setFieldValue={setFieldValue} />
         <ResendCodeContainer>
-          <Caption>کد را دریافت نکردید؟</Caption>
+          <Caption>
+            {textConstants.dontGetCode}
+          </Caption>
 
-          <LinkedText onClick={handleResetCountDown}>ارسال مجدد</LinkedText>
+          <LinkedText onClick={handleResetCountDown}>
+            {textConstants.resendCode}
+          </LinkedText>
         </ResendCodeContainer>
         <Button type="submit" disabled={values.otpCode !== "1111"}>
           {btncontent(value, values.otpCode)}
         </Button>
       </form>
       {values.otpCode !== "1111" && values.otpCode.length === 4 ? (
-        <Toast message="کد وارد شده اشتباه است" />
+        <Toast message={textConstants.toastMsg} />
       ) : null}
     </LoginSheet>
   );

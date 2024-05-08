@@ -11,40 +11,66 @@ import {
 import SearchIconNormal from "../../assets/images/SearchNoraml.svg";
 import SearchIconNormalWhite from "../../assets/images/search-normal.svg";
 import { useFormik } from "formik";
-import { LocationInfo } from "../../services/getLocationInfo/getLocationInfo.types";
+import { ResponseData } from "../../services/getLocationInfo/getLocationInfo.types";
 import getLocationInfo from "../../services/getLocationInfo/getLocationInfo";
+import textConstants from "../../constants/textConstants";
+import { useDispatch } from "react-redux";
+import { setNewLocation } from "../../store/reducers/locationListReducer";
 
 const SearchBar: FC = () => {
-    const [data, setData] = useState<LocationInfo| null>(null)
-    console.log(data)
-    const handleRegister = ()=>{
-      getLocationInfo(values.ipNumber).then(res=>setData(res))
+  const dispatch = useDispatch();
+  const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleRegister = () => {
+    if (!isFetching) {
+      setIsFetching(true);
+      setError(null);
+      getLocationInfo(values.ipNumber)
+        .then((res) => {
+          dispatch(setNewLocation(res));
+          setIsFetching(false);
+        })
+        .catch((err) => {
+          setIsFetching(false);
+          if (err.response && err.response.status === 400) {
+            setError(textConstants.tryAgain);
+          } else if (err.response && err.response.status === 500) {
+            setError(textConstants.serverNotFound);
+          } else {
+            setError(textConstants.noService);
+          }
+        });
     }
-    const { handleSubmit, values, setFieldValue, errors } = useFormik({
-        onSubmit: handleRegister,
-        // validationSchema: registrationFormScheme,
-        initialValues: {
-          ipNumber: ""
-        },
-      });
+  };
+
+  const { handleSubmit, values, setFieldValue, errors } = useFormik({
+    onSubmit: handleRegister,
+    initialValues: {
+      ipNumber: "",
+    },
+  });
+
   return (
     <SearchBarSheet>
-      <Title $color="">آی پی مد نظر خود را پیدا کنید</Title>
+      <Title $color="">{textConstants.searchTitle}</Title>
       <Subtitle color="#7E838F" fontWeight={400}>
-        اگر بتوانید آدرس IPv4 یا IPv6 یک کاربر اینترنت را بیابید، می توانید با
-        استفاده از ابزار جستجوی IP ما، ایده ای از آن کشور یا جهان پیدا کنید. چه
-        باید کرد: آدرس IP مورد نظر خود را در کادر زیر وارد کنید، سپس روی "دریافت
-        جزئیات IP" کلیک کنید.
+        {textConstants.searchCaption}
       </Subtitle>
       <SearchBoxContainer onSubmit={handleSubmit}>
         <SearchInputContainer>
           <SearchIcon src={SearchIconNormal} alt="" />
-          <SearchInput type="text" placeholder="جستجو" onChange={(e)=>setFieldValue("ipNumber", e.target.value)} />
+          <SearchInput
+            type="text"
+            placeholder="جستجو"
+            onChange={(e) => setFieldValue("ipNumber", e.target.value)}
+          />
         </SearchInputContainer>
         <SearchButton type="submit">
           <img src={SearchIconNormalWhite} alt="" />
         </SearchButton>
       </SearchBoxContainer>
+      {error && <div style={{ color: "red" }}>{error}</div>}
     </SearchBarSheet>
   );
 };
