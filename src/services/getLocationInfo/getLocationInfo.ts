@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { ResponseData } from "./getLocationInfo.types";
 import { TOKEN } from "../../constants/tokens";
 import http from "../../utils/http";

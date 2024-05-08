@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ResponseData } from "../../services/getLocationInfo/getLocationInfo.types";
 
 export interface FilteredDataProps {
   ipAddress: string;

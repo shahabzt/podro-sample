@@ -20,7 +20,6 @@ const Toast: React.FC<ToastProps> = ({ message, duration = 4000 }) => {
 
   return (
     <ToastContainer visible={visible}>
-      <img src="" />
       {message}
     </ToastContainer>
   );

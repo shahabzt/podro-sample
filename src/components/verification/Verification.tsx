@@ -60,7 +60,7 @@ const Verification: FC = () => {
     if (values.otpCode === "1111") {
       stop();
     }
-  }, []);
+  },[]);
 
   return (
     <LoginSheet>

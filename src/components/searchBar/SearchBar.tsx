@@ -6,7 +6,6 @@ import {
   SearchIcon,
   SearchInput,
   SearchInputContainer,
-  SectionContainer,
 } from "./SearchBar.style";
 import SearchIconNormal from "../../assets/images/SearchNoraml.svg";
 import SearchIconNormalWhite from "../../assets/images/search-normal.svg";
