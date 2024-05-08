@@ -1,9 +1,16 @@
-import React, { FC } from 'react'
+import  { FC } from 'react'
 import SearchBar from '../../components/searchBar/SearchBar'
+import { SearchBarSheet } from '../../styles/SearchBarSheet'
+import LocationInformation from '../../components/locationInformation/LocationInformation'
 
 const Search:FC = () => {
   return (
-    <SearchBar/>
+    <SearchBarSheet>
+      <SearchBar/>
+      <LocationInformation />
+
+
+    </SearchBarSheet>
   )
 }
 
