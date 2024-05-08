@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SearchBarSheet = styled.div({
-    backgroundColor: "#fff",
-  width:"62vw",
+  backgroundColor: "#fff",
+  width: "62vw",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -11,4 +11,4 @@ export const SearchBarSheet = styled.div({
   boxSizing: "border-box",
   border: "1px solid #fff",
   borderRadius: "16px",
-})
+});

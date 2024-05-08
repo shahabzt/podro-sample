@@ -10,7 +10,10 @@ import {
 } from "./Verification.style";
 import { Caption, LinkedText, Subtitle } from "../../styles/typography";
 import { useDispatch, useSelector } from "react-redux";
-import { resetVerify, setPhoneNumber } from "../../store/reducers/verificationReducer";
+import {
+  resetVerify,
+  setPhoneNumber,
+} from "../../store/reducers/verificationReducer";
 import { RootState } from "../../store/store";
 import { WelcomeTexts } from "../register/Register.Styles";
 import OTPInput from "../otpInput/OtpInput";
@@ -42,7 +45,7 @@ const Verification: FC = () => {
 
   const handleRegister = () => {
     navigate("/search");
-    dispatch(resetVerify())
+    dispatch(resetVerify());
   };
 
   const { handleSubmit, values, setFieldValue, errors } = useFormik({
@@ -66,9 +69,7 @@ const Verification: FC = () => {
         <BackIcon src={ArrowLeft} alt="" onClick={handleBack} />
       </HeaderContainer>
       <WelcomeTexts>
-        <Subtitle>
-          {textConstants.inputOtpCode}
-        </Subtitle>
+        <Subtitle>{textConstants.inputOtpCode}</Subtitle>
         <Caption>
           کد تایید برای شماره
           {phoneNumber}
@@ -81,9 +82,7 @@ const Verification: FC = () => {
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <OTPInput setFieldValue={setFieldValue} />
         <ResendCodeContainer>
-          <Caption>
-            {textConstants.dontGetCode}
-          </Caption>
+          <Caption>{textConstants.dontGetCode}</Caption>
 
           <LinkedText onClick={handleResetCountDown}>
             {textConstants.resendCode}

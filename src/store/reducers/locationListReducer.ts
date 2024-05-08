@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { ResponseData } from "../../services/getLocationInfo/getLocationInfo.types";
 
-export interface FilteredDataProps{
+export interface FilteredDataProps {
   ipAddress: string;
-  country:string;
+  country: string;
   region: string;
   city: string;
-  latitude:string;
-  Longitude:string;
+  latitude: string;
+  Longitude: string;
 }
 
 const initialState: FilteredDataProps[] = [];

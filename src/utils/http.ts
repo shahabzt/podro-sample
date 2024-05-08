@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  TOKEN } from "../constants/tokens";
+import { TOKEN } from "../constants/tokens";
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -9,7 +9,6 @@ const interceptor = http.interceptors.request.use(
   function onFulfilled(config) {
     if (!config.headers.Authorization) {
       const access = TOKEN.accessToken;
-      
 
       if (access) {
         config.headers.Authorization = `Bearer ${access}`;
@@ -29,9 +28,7 @@ const interceptor = http.interceptors.request.use(
     } else {
       return null;
     }
-  },
+  }
 );
-
-
 
 export default http;

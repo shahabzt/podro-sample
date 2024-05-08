@@ -72,28 +72,25 @@ const SearchBar: FC = () => {
 
   return (
     <>
-     
-        <Title $color="">{textConstants.searchTitle}</Title>
-        <Subtitle color="#7E838F" fontWeight={400}>
-          {textConstants.searchCaption}
-        </Subtitle>
-        <SearchBoxContainer  onSubmit={handleSubmit}>
-          <SearchInputContainer>
-            <SearchIcon src={SearchIconNormal} alt="" />
-            <SearchInput
-              type="text"
-              placeholder="جستجو"
-              onChange={(e) => setFieldValue("ipNumber", e.target.value)}
-            />
-          </SearchInputContainer>
-          <SearchButton type="submit">
-            <img src={SearchIconNormalWhite} alt="" />
-          </SearchButton>
-        </SearchBoxContainer>
-        {errors.ipNumber && (
-          <div style={{ color: "red" }}>{errors.ipNumber}</div>
-        )}
-     
+      <Title $color="">{textConstants.searchTitle}</Title>
+      <Subtitle color="#7E838F" fontWeight={400}>
+        {textConstants.searchCaption}
+      </Subtitle>
+      <SearchBoxContainer onSubmit={handleSubmit}>
+        <SearchInputContainer>
+          <SearchIcon src={SearchIconNormal} alt="" />
+          <SearchInput
+            type="text"
+            placeholder="جستجو"
+            onChange={(e) => setFieldValue("ipNumber", e.target.value)}
+          />
+        </SearchInputContainer>
+        <SearchButton type="submit">
+          <img src={SearchIconNormalWhite} alt="" />
+        </SearchButton>
+      </SearchBoxContainer>
+      {errors.ipNumber && <div style={{ color: "red" }}>{errors.ipNumber}</div>}
+
       {fetchErrors && <Toast message={fetchErrors} />}
     </>
   );

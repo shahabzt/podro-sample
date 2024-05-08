@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const LoginSheet = styled.div({
   backgroundColor: "#fff",
-  width:"375px",
+  width: "375px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",

@@ -5,15 +5,15 @@ interface UseTimerOptions {
 }
 
 export function useTimer({ startsFrom }: UseTimerOptions) {
-  // States
+
   const [timer, setTimer] = useState<number>(startsFrom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
-  // Refs
+
   const timerId = useRef<ReturnType<typeof setInterval> | null>(null);
-  // Variables
+
   const isDone = timer === 0;
 
-  // Watchers
+
   useEffect(() => {
     if (isStarted) {
       timerId.current = setInterval(() => {
@@ -35,7 +35,7 @@ export function useTimer({ startsFrom }: UseTimerOptions) {
     }
   }, [isStarted]);
 
-  // Handlers
+
   function start() {
     setIsStarted(true);
   }

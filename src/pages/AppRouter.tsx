@@ -5,13 +5,13 @@ import Search from "./search/Search";
 const AppRouter = createBrowserRouter([
   {
     path: `/`,
-    element: <Login/>,
+    element: <Login />,
   },
- 
+
   {
-    path:`/search`,
-    element:<Search/>
-  }
+    path: `/search`,
+    element: <Search />,
+  },
 ]);
 
 export default AppRouter;

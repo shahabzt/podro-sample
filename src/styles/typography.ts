@@ -9,10 +9,10 @@ export const Title = styled.div<{ $color: string }>({
 export const Subtitle = styled.div<{ color?: string; fontWeight?: number }>`
   font-size: 16px;
   line-height: 24px;
-  color: ${(props) => props.color || '#000'};
+  color: ${(props) => props.color || "#000"};
   font-weight: ${(props) => props.fontWeight || 500};
   text-align-last: center;
-  text-align:justify
+  text-align: justify;
 `;
 
 export const Caption = styled.div({

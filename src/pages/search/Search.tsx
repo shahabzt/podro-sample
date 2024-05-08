@@ -1,17 +1,15 @@
-import  { FC } from 'react'
-import SearchBar from '../../components/searchBar/SearchBar'
-import { SearchBarSheet } from '../../styles/SearchBarSheet'
-import LocationInformation from '../../components/locationInformation/LocationInformation'
+import { FC } from "react";
+import SearchBar from "../../components/searchBar/SearchBar";
+import { SearchBarSheet } from "../../styles/SearchBarSheet";
+import LocationInformation from "../../components/locationInformation/LocationInformation";
 
-const Search:FC = () => {
+const Search: FC = () => {
   return (
     <SearchBarSheet>
-      <SearchBar/>
+      <SearchBar />
       <LocationInformation />
-
-
     </SearchBarSheet>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
